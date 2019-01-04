@@ -1,0 +1,7 @@
+div#CoyoteBackground {
+    position: absolute;
+    width:3000px;
+    height:540px;
+    margin:auto;
+    background-image: url(../img/DesertBackground.png);
+}
