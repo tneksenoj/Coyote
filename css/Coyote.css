@@ -47,7 +47,8 @@ div#Coyote {
     position: absolute;
     width:300px;
     height:300px;
+    top: 240px;
     margin:auto;
-    content: url(../img/Coyote.gif);
+    /* content: url(../img/Coyote_right.gif); */
     z-index: 0;
 }
