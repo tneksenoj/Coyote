@@ -48,6 +48,7 @@ div#Coyote {
     width:300px;
     height:300px;
     top: 240px;
+	left: 240px;
     margin:auto;
     /* content: url(../img/Coyote_right.gif); */
     z-index: 0;

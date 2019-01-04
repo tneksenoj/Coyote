@@ -23,13 +23,27 @@ requestAnimFrame = (function(){
 })();
 
 // jQuery plugin function to preload images
-$.preload = function( arr ) {
-    return $.map(arr, function( val ){
+$.preload = function( obj ) {
+	var robj = {};
+	for ( var key in obj ) {
+		if (obj.hasOwnProperty(key)) {
+			var $img = $('<img/>');
+			$img[0].src = obj[key];
+			robj[key] = $img[0];
+		}
+    }
+	return robj;
+}
+
+/* jQuery plugin function to preload images
+$.preload = function( obj ) {
+    return $.map(obj, function( prop, key ){
         var $img = $('<img/>');
-        $img[0].src = val;
+        $img[0].src = prop;
         return $img[0];
     });
 }
+*/
 
 if ( typeof Object.create !== 'function' ) {
     Object.create = function(o) {
