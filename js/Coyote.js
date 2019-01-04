@@ -11,40 +11,40 @@
 ///////////////////////////////////////////////////////////////////////
 
 (function($){
-  // Initial speed and position of background
-  var position = 0;   
-  var speed = 6;      
-  
-  // Use jQuery to get the background element
-  var $background = $("#CoyoteBackground");  
-  
-  // IFFY function to figure out best animation function and store it
-  var requestAnimFrame = ( function() {
-    if (window.requestAnimationFrame) return window.requestAnimationFrame;
-    if (window.webkitRequestAnimationFrame) return window.webkitRequestAnimationFrame;
-    if (window.mozRequestAnimationFrame) return window.mozRequestAnimationFrame;
-    if (window.oRequestAnimationFrame) return window.oRequestAnimationFrame;
-    if (window.msRequestAnimationFrame) return window.msRequestAnimationFrame;
-    else return  function( callback, element ){
-        window.setTimeout(callback, element);
-    };
-  })();
 
-  // Callback function to move the background 
-  function draw() {
-    // request another animation frame
-    requestAnimFrame(draw,25);
-    // reset position to 0 once the image has scrolled far enough
-    if ( position < -$background.width() ) {
-        position = 0;
+    var position = 0;
+    var speed = 12;
+    var $background = $("#DesertBackground_back");
+
+    var requestAnimFrame = (function(){
+        if (window.requestAnimationFrame) return window.requestAnimationFrame;
+        if (window.webkitRequestAnimationFrame) return window.webkitRequestAnimationFrame;
+        if (window.mozRequestAnimationFrame) return window.mozRequestAnimationFrame;
+        if (window.oRequestAnimationFrame) return window.oRequestAnimationFrame;
+        if (window.msRequestAnimationFrame) return window.msRequestAnimationFrame;
+        else return  function( callback, element ){
+            window.setTimeout(callback, element);
+        };
+    })();
+
+    function draw() {
+      requestAnimFrame(draw,25);
+      
+      // Update the position of each background layer
+      $('#DesertBackground_clouds_2').css('background-position', (position * (1.0/12.0)) );
+      $('#DesertBackground_mid').css('background-position', (position * (1.0/6.0)) );
+      $('#DesertBackground_clouds_1').css('background-position', (position * (1.0/3.0)) );
+      $('#DesertBackground_front').css('background-position',position  );
+
+      // Update position
+      position = position - speed;
+
+      // Once the slowest moving background has wrapped, reset position
+      if ( position* (1.0/12.0) < -$background.width() ) {
+          position = 0;
+      }
     }
-    // Set actual background position 
-    $('#CoyoteBackground').css('background-position',position );
     
-    // Update the background position by the speed
-    position = position - speed;
-  }
-  // Start the animation
-  draw();
-  
+    // Start the animation
+    draw();
 })(jQuery);
